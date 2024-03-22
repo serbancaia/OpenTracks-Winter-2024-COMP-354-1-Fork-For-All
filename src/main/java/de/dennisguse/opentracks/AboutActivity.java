@@ -17,6 +17,7 @@ public class AboutActivity extends AbstractActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setTitle(getString(R.string.about_preference_title));
 
         viewBinding.aboutTextDescription.setText(getString(R.string.about_description));
