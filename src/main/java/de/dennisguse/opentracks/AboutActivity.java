@@ -17,6 +17,7 @@ public class AboutActivity extends AbstractActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //testing
 
         setTitle(getString(R.string.about_preference_title));
 
