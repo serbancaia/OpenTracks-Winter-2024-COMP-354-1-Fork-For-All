@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -62,6 +65,7 @@ public class IntentDashboardUtils {
     private static final String EXTRAS_SHOULD_KEEP_SCREEN_ON = "EXTRAS_SHOULD_KEEP_SCREEN_ON";
     private static final String EXTRAS_SHOW_WHEN_LOCKED = "EXTRAS_SHOULD_KEEP_SCREEN_ON";
     private static final String EXTRAS_SHOW_FULLSCREEN = "EXTRAS_SHOULD_FULLSCREEN";
+    private static final String CHAIRLIFTS = "CHAIRLIFTS";
 
     private static final int TRACK_URI_INDEX = 0;
     private static final int TRACKPOINTS_URI_INDEX = 1;
@@ -146,6 +150,87 @@ public class IntentDashboardUtils {
 
         String trackIdList = ContentProviderUtils.formatIdListForUri(trackIds);
 
+        // Generate dummy
+        JSONObject c1 = new JSONObject();
+        try {
+            c1.put("name", "L'Étoile");
+            c1.put("distance", 722);
+            c1.put("wtime", 600);
+            c1.put("speed", 5.08);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject c2 = new JSONObject();
+        try {
+            c2.put("name", "Flèche d’Argent");
+            c2.put("distance", 900);
+            c2.put("wtime", 600);
+            c2.put("speed", 5.08);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject c3 = new JSONObject();
+        try {
+            c3.put("name", "L'Express");
+            c3.put("distance", 672);
+            c3.put("wtime", 700);
+            c3.put("speed", 5.08);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject c4 = new JSONObject();
+        try {
+            c4.put("name", "Le Piedmont");
+            c4.put("distance", 755);
+            c4.put("wtime", 600);
+            c4.put("speed", 5.08);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Generate dummy
+        JSONObject r1 = new JSONObject();
+        try {
+            r1.put("name", "La Plagne");
+            r1.put("speed", 18);
+            r1.put("distance", 1644);
+            r1.put("duration", 2000);
+            r1.put("maxSpeed", 30.25);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject r2 = new JSONObject();
+        try {
+            r2.put("name", "Jay");
+            r2.put("speed", 26);
+            r2.put("distance", 931);
+            r2.put("duration", 1100);
+            r2.put("maxSpeed", 40.7);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject r3 = new JSONObject();
+        try {
+            r3.put("name", "Grand Élan");
+            r3.put("speed", 23);
+            r3.put("distance", 1051);
+            r3.put("duration", 1200);
+            r3.put("maxSpeed", 27.67);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONObject r4 = new JSONObject();
+        try {
+            r4.put("name", "Tom Barbeau");
+            r4.put("speed", 30);
+            r4.put("distance", 658);
+            r4.put("duration", 700);
+            r4.put("maxSpeed", 42.6);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         ArrayList<Uri> uris = new ArrayList<>();
         uris.add(TRACK_URI_INDEX, Uri.withAppendedPath(TracksColumns.CONTENT_URI, trackIdList));
         uris.add(TRACKPOINTS_URI_INDEX, Uri.withAppendedPath(TrackPointsColumns.CONTENT_URI_BY_TRACKID, trackIdList));
@@ -153,7 +238,15 @@ public class IntentDashboardUtils {
 
         Intent intent = new Intent(ACTION_DASHBOARD);
         intent.putExtra(EXTRAS_PROTOCOL_VERSION, CURRENT_VERSION);
+        intent.putExtra("c1", c1.toString());
+        intent.putExtra("c2", c2.toString());
+        intent.putExtra("c3", c3.toString());
+        intent.putExtra("c4", c4.toString());
 
+        intent.putExtra("r1", r1.toString());
+        intent.putExtra("r2", r2.toString());
+        intent.putExtra("r3", r3.toString());
+        intent.putExtra("r4", r4.toString());
         intent.putParcelableArrayListExtra(ACTION_DASHBOARD_PAYLOAD, uris);
 
         intent.putExtra(EXTRAS_SHOULD_KEEP_SCREEN_ON, PreferencesUtils.shouldKeepScreenOn());
